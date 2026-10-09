@@ -1,0 +1,12 @@
+{
+  "name": "Full Day",
+  "short_name": "Full Day",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#e2601a",
+  "background_color": "#ffffff",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
