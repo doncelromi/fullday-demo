@@ -47,7 +47,11 @@ export default function OwnerCalendario() {
 
   const initialProp = (location.state as { prop?: string } | null)?.prop;
   const [sel, setSel] = useState<string>(initialProp && MARIELA_PROPS.includes(initialProp) ? initialProp : 'all');
-  const [month, setMonth] = useState(() => startOfMonth(TODAY));
+  // Si hay una reserva recién creada en la demo, el calendario abre en su mes para mostrarla
+  const [month, setMonth] = useState(() => {
+    const nueva = useApp.getState().reservas.find((r) => r.nueva && r.origen === 'fullday' && MARIELA_PROPS.includes(r.propiedadId));
+    return startOfMonth(nueva ? parseISO(nueva.checkIn) : TODAY);
+  });
   const [mode, setMode] = useState<'mes' | 'agenda'>(() => (window.matchMedia('(max-width: 639px)').matches ? 'agenda' : 'mes'));
   const [syncing, setSyncing] = useState(false);
   const [detailId, setDetailId] = useState<string | null>(null);
