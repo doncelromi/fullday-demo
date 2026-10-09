@@ -1,5 +1,5 @@
-import { PageHeader } from '@/components/ui';
+import { MetricasView } from '@/pages/shared/MetricasView';
 
-export default function propietarioMetricas() {
-  return <PageHeader title="propietario/Metricas" />;
+export default function OwnerMetricas() {
+  return <MetricasView scope="propietario" />;
 }

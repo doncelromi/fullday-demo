@@ -1,5 +1,5 @@
-import { PageHeader } from '@/components/ui';
+import { NotifCenter } from '@/pages/shared/NotifCenter';
 
-export default function propietarioNotificaciones() {
-  return <PageHeader title="propietario/Notificaciones" />;
+export default function OwnerNotificaciones() {
+  return <NotifCenter role="propietario" />;
 }

@@ -1,5 +1,5 @@
-import { PageHeader } from '@/components/ui';
+import { ReservasView } from '@/pages/shared/ReservasView';
 
-export default function adminReservas() {
-  return <PageHeader title="admin/Reservas" />;
+export default function AdminReservas() {
+  return <ReservasView scope="admin" />;
 }
