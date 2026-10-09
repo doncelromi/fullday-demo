@@ -13,7 +13,7 @@
 - B12-B14 Admin: panel con 'Requiere atención', propiedades (destacado manual + Superanfitrión auto por reputación Airbnb con override), reservas y detalle con identidad/historial, calendarios iCal con log y reintento, pagos con log de webhooks y 'Simular webhook', métricas con top 5 y CSV real, plantillas WhatsApp editables con vista previa, usuarios RBAC.
 - B15 Preview banners + DevNotice. B17 Tour manual. B18 Modo Trailer (11 escenas). B19 Conserje IA con offsets mobile.
 - B20 i18n: `npm run check:i18n` → 0 faltantes (claves + pares x(es,en) sin vacíos).
-- B21 QA: 0 scroll horizontal a 360px en las 25 rutas de los 3 roles; flujo de reserva propaga a Admin y calendario de Mariela; sin errores de consola; modo oscuro OK.
+- B21 QA: 0 scroll horizontal a 360px en las 25 rutas; modales centrados con 0px de desvío (1440×900, 1920×854, 375×812); tour completo en mobile (13 pasos con target); trailer en loop (11 escenas, anillo que sigue al elemento); "Ver en el demo" con retorno y resaltado; Conserje IA responde con datos y deriva el precio al ojito; sin errores de consola.
 - B22 Build limpio (tsc + vite). Repo: https://github.com/doncelromi/fullday-demo
 
 ## Pendiente

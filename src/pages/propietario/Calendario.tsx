@@ -266,6 +266,7 @@ export default function OwnerCalendario() {
                         key={`${s.r.id}-${s.col}`}
                         type="button"
                         onClick={() => setDetailId(s.r.id)}
+                        data-trailer={s.r.nueva && s.r.origen === 'fullday' ? 'cal-nueva' : undefined}
                         title={`${s.r.huespedNombre} · ${propOf(s.r.propiedadId)?.nombre} · ${fmtRange(s.r.checkIn, s.r.checkOut, lang)}`}
                         style={{ gridColumn: `${s.col + 1} / span ${s.span}`, gridRow: s.lane + 2, background: s.r.origen === 'bloqueo' ? STRIPES : undefined }}
                         className={cn(

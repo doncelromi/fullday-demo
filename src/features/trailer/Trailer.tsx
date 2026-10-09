@@ -32,7 +32,7 @@ const SCENES: TrailerScene[] = [
   { view: '/reservar/casa-del-olivar', role: 'cliente', clicks: ['[data-trailer="btn-continuar"]', '[data-trailer="btn-continuar"]', '[data-trailer="sample-doc"]'], selector: '[data-trailer="identidad"]', chapter: 'tr.ch4', title: 'tr.t5', body: 'tr.b5', duration: 9000 },
   { view: '/reservar/casa-del-olivar', role: 'cliente', clicks: ['[data-trailer="btn-continuar"]', '[data-trailer="btn-pagar"]', '[data-trailer="mp-confirm"]'], selector: '[data-trailer="mp-checkout"]', chapter: 'tr.ch4', title: 'tr.t6', body: 'tr.b6', duration: 8500 },
   { view: '/reservar/casa-del-olivar', role: 'cliente', selector: '[data-trailer="confirmacion"]', chapter: 'tr.ch4', title: 'tr.t7', body: 'tr.b7', duration: 7000 },
-  { view: '/propietario/calendario', role: 'propietario', selector: '[data-trailer="calendario"]', chapter: 'tr.ch8', title: 'tr.t8', body: 'tr.b8', duration: 7000 },
+  { view: '/propietario/calendario', role: 'propietario', selector: '[data-trailer="cal-nueva"]', chapter: 'tr.ch8', title: 'tr.t8', body: 'tr.b8', duration: 7000 },
   { view: '/admin/pagos', role: 'admin', selector: '[data-trailer="btn-webhook"]', click: true, chapter: 'tr.ch9', title: 'tr.t9', body: 'tr.b9', duration: 7500 },
   { view: '/admin/metricas', role: 'admin', selector: '[data-trailer="top5"]', chapter: 'tr.ch9', title: 'tr.t10', body: 'tr.b10', duration: 7000 },
   { chapter: 'tr.ch11', title: 'tr.t11', body: 'tr.b11', duration: 8000, cta: true, position: 'center' },
@@ -170,20 +170,24 @@ export function Trailer() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [trailer]);
 
-  // Mantener el anillo pegado al elemento si la página scrollea
+  // Mantener el anillo pegado al elemento (scroll suave, layout que se mueve, animaciones)
+  const hasRing = !!ring;
   useEffect(() => {
-    if (!trailer) return;
+    if (!trailer || !hasRing) return;
     const sel = SCENES[i]?.selector;
     if (!sel) return;
-    const on = () => {
+    const id = window.setInterval(() => {
       const el = document.querySelector(sel);
-      if (!el || !ring) return;
+      if (!el) return;
       const r = el.getBoundingClientRect();
-      setRing({ x: r.left - 6, y: r.top - 6, w: r.width + 12, h: Math.min(r.height + 12, window.innerHeight - r.top) });
-    };
-    window.addEventListener('scroll', on, true);
-    return () => window.removeEventListener('scroll', on, true);
-  }, [trailer, i, ring]);
+      const top = Math.max(r.top, 64);
+      setRing((prev) => {
+        const next = { x: r.left - 6, y: top - 6, w: r.width + 12, h: Math.min(r.bottom - top + 12, window.innerHeight - top - 4) };
+        return prev && Math.abs(prev.x - next.x) < 1 && Math.abs(prev.y - next.y) < 1 && Math.abs(prev.h - next.h) < 1 ? prev : next;
+      });
+    }, 120);
+    return () => clearInterval(id);
+  }, [trailer, i, hasRing]);
 
   if (!trailer) return null;
   const sc = SCENES[i];
